@@ -1,0 +1,18 @@
+Problem: 
+THE IMAGE STEGANOGRAPHER
+What you see is not all there is,
+Hidden in pixels, a message exists.
+Download the image from /images/oracle-secret.jpg,
+And extract the text that's been kept concept.
+
+Hint: Sometimes strings hide in files. 
+
+Solution: 
+Download image and use strings command or hex editor
+Or check metadata with exiftool to find 
+Hidden text: FLAG{pixel_whisperer}
+
+Answer: pixel_whisperer
+Points: 4
+
+

@@ -1,0 +1,12 @@
+Problem: 
+THE HIDDEN CHRONOMETER
+Time reveals what it first conceals.
+I count backward toward the Oracle's final awakening.
+Find me where moments are measured and futures are anticipated.
+
+Hint: My path is /countdown but my secret lies behind the digits.
+
+Solution: 
+Inspect and find FLAG{behind_the_curtain} in the timer element 
+Answer: behind_the_curtain 
+Points: 1

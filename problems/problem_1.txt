@@ -1,0 +1,18 @@
+Problem: 
+THE SILENT GUARDIAN
+To begin your journey, seek the answer where the rules are defined,
+but look not to the text—look to the space between.
+The silent guardian holds your first key.
+
+Solution: 
+By inspecting /rules they get 
+<!-- The web robots know where to avoid. 
+Find their instruction file to discover the hidden flag. → 
+
+find robots.txt file and get 
+# Oracle's hidden message
+# The flag is where creativity meets code
+FLAG{robots_know_secrets} 
+
+Answer: robots_know_secrets
+Points: 2

@@ -1,0 +1,24 @@
+THE WEB WEAVER'S PUZZLE
+I weave connections, thread by thread,
+Where requests and responses are bred.
+Find the endpoint that returns JSON sweet,
+But only if your request is complete.
+
+Hint: The spider's path is /api/weaver.
+
+Solution:
+So you sen a request then if you dont have the right headers you get this:
+{
+  "error": "Missing required headers",
+  "hint": "Try including X-Oracle-Key with a value that represents knowledge"
+}
+Then it returns 
+{
+  "message": "You have found the knowledge within!",
+  "flag": "{api_weaver_master}"
+}
+
+Answer: api_weaver_master 
+Points: 3 
+
+

@@ -1,0 +1,16 @@
+Problem:
+THE REDIRECT MAZE
+Follow the path where pages turn,
+At each step, new clues you'll learn.
+Start at /maze/begin and don't lose your way,
+The final destination holds the flag today.
+
+Hint: Watch the URL patterns carefully.
+
+Solution: 
+/maze/begin → redirects to /maze/step1 with clue "add 2"
+/maze/step3 → redirects to /maze/step5 with clue "multiply by 3"
+/maze/step15 → reveals FLAG{redirect_expert}
+
+Answer: redirect_expert 
+Points: 2
