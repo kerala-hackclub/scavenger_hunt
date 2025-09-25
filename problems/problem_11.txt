@@ -1,0 +1,23 @@
+Problem: 
+THE STEGANOGRAPHY MASTER
+This image contains a hidden flag split into three parts:
+/image/secret_puzzle.png
+
+Use these three techniques to extract the pieces:
+1. Check the image's metadata
+2. Look for hidden text strings within the file  
+3. Analyze the least significant bits of pixel data
+
+Combine all three pieces in order to form the complete flag.
+
+Solution:
+Get Metadata using Exif: FLAG{st
+Get Strings: eganogra
+LSB Extraction: phy_king}
+
+Combined: FLAG{steganography_king}
+
+Answer: stenganography_king 
+Points: 8
+
+

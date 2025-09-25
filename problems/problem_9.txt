@@ -8,8 +8,7 @@ And extract the text that's been kept concept.
 Hint: Sometimes strings hide in files. 
 
 Solution: 
-Download image and use strings command or hex editor
-Or check metadata with exiftool to find 
+Download image and use strings command 
 Hidden text: FLAG{pixel_whisperer}
 
 Answer: pixel_whisperer

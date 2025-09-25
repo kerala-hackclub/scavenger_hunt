@@ -1,0 +1,5 @@
+THE QUANTUM ORACLE
+Protocol: Quantum Entanglement Protocol (QEP)
+Authentication Required: Solve the handshake puzzle
+
+The oracle speaks in superposition. You must collapse the waveform to reveal the truth.

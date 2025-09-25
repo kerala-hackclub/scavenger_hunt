@@ -1,0 +1,14 @@
+THE REBUS RIDDLE
+Solve the visual puzzle:
+
+[EYE] [H8] [CC] [NN] [TEA]
+
+Combine the solutions in all caps no spaces to form the flag.
+
+Solution:
+Eye = I, H8 = Hate, CC = Seas, NN = Ends, Tea = T → FLAG{IHATESEASENDST}
+
+Answer: IHATESEASENDST 
+Points: 1
+
+
