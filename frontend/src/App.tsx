@@ -1,16 +1,53 @@
-import { KeyRound } from "lucide-react";
+import { KeyRound, LogOut } from "lucide-react";
 import Chest from "./Components/Chest/Chest";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./Login";
+import { Flip, ToastContainer } from "react-toastify";
 
 function App() {
   return (
+    <BrowserRouter>
+      <div className="fixed top-0 inset-0 bg-[url('/bg.webp')] bg-cover bg-center -z-10"></div>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Flip}
+      />
+      <div className="w-full h-screen flex sm:flex-row flex-col justify-center items-center">
+        <Routes>
+          <Route path="/main" element={<MainPage />} />
+          <Route path="/" element={<Login />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+
+const MainPage = () => {
+  return (
     <>
       <div className="bg-black/50 w-screen h-screen overflow-scroll flex flex-col items-center">
-        <div className="fixed top-0 inset-0 bg-[url('/bg.webp')] bg-cover bg-center -z-10"></div>
         <div className="fixed top-0 bg-linear-to-b sm:from-transparent from-black z-1000 w-full flex justify-between px-3 py-2 sm:text-2xl text-xl text-white/75">
-          <p>Logged in as Rino</p>
-          <div className="flex gap-2 bg-[rgba(0,0,0,0.3)] px-3 py-1 justify-center items-center rounded-full border-1 border-white/15">
+          <div className="flex justify-center items-center gap-2">
+            <LogOut
+              size={20}
+              className="text-red-400 hover:mr-2 active:mr-1 transition-all duration-300 hover:scale-190 active:scale-140 hover:bg-[rgba(100,0,0,0.3)] rounded-full hover:p-[0.1em] border-1 border-[rgba(100,0,0,0.3)] backdrop-blur-2xl"
+            />
+            <p>rino</p>
+          </div>
+          <div className="flex gap-2 bg-[rgba(0,0,0,0.3)] backdrop-blur-2xl px-3 py-1 justify-center items-center rounded-full border-1 border-white/15">
             <img src="/coin.webp" className="w-6 h-6" />
-            <p>5</p>
+            <p>000</p>
           </div>
         </div>
         <img src="/title.webp" className="h-150" />
@@ -24,7 +61,7 @@ function App() {
           </div>
         </div>
         <div className="mx-5 grid sm:grid-cols-5 grid-cols-2 sm:w-[70%] mt-20 mb-50">
-          {Array(10)
+          {Array(15)
             .fill(1)
             .map((_, i) => (
               <Chest index={i + 1} />
@@ -33,9 +70,7 @@ function App() {
       </div>
     </>
   );
-}
-
-export default App;
+};
 
 const CodeInput = () => {
   return (
@@ -44,6 +79,24 @@ const CodeInput = () => {
         type="text"
         placeholder="Enter the codes here."
         className="w-full h-full px-4 text-2xl focus:bg-[rgba(0,0,0,0.1)]"
+      />
+    </div>
+  );
+};
+
+export const Input = ({
+  placeholder,
+  type,
+}: {
+  placeholder: string;
+  type: string;
+}) => {
+  return (
+    <div className="w-full backdrop-blur-2xl h-15 bg-[rgba(109,126,134,0.5)] overflow-hidden rounded-xl border-2 border-[rgba(255,255,255,0.3)]">
+      <input
+        type={type}
+        placeholder={placeholder}
+        className="w-full h-full px-4 text-2xl text-white focus:bg-[rgba(0,0,0,0.1)]"
       />
     </div>
   );
