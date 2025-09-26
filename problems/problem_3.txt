@@ -1,12 +1,13 @@
-Problem: 
-THE HIDDEN CHRONOMETER
-Time reveals what it first conceals.
-I count backward toward the Oracle's final awakening.
-Find me where moments are measured and futures are anticipated.
+THE REBUS RIDDLE
+Solve the visual puzzle:
 
-Hint: My path is /countdown but my secret lies behind the digits.
+[U] [C] [Y-FORK-ROAD] [2]
 
-Solution: 
-Inspect and find FLAG{behind_the_curtain} in the timer element 
-Answer: behind_the_curtain 
-Points: 200
+Combine the solutions in all caps no spaces to form the flag.
+(Note: The [Y-FORK-ROAD] is an image of a fork in a road).
+
+Solution:
+YOU + SEE + WHY + TOO = YOUSEEWHYTOO
+
+Answer: YOUSEEWHYTOO 
+Points: 100

@@ -1,6 +1,6 @@
 Problem:
 THE PASSWORD CRACKER
-A password-protected ZIP file: /downloads/secret_vault.zip
+A password-protected ZIP file: /secret_vault.zip
 
 Hint: The password is the MD5 hash of "oracle" followed by the year of the first computer bug (1947).
 

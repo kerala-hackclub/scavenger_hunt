@@ -1,0 +1,32 @@
+.hidden-chronometer {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.hidden-chronometer h1 {
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+#timer-element:hover {
+  transform: scale(1.02);
+  transition: transform 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  transition: all 0.2s ease;
+}
+
+/* Animation for the timer when paused */
+#timer-element.blink {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
