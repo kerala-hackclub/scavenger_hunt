@@ -1,8 +1,11 @@
 import sqlite3 from "sqlite3";
 import bcrypt from "bcrypt";
 import path from "path";
+import fs from "fs";
 
 const db = new sqlite3.Database(path.resolve(import.meta.dir, "app.db"));
+const raw = fs.readFileSync("users.json", "utf-8");
+const users: { username: string; password: string }[] = JSON.parse(raw);
 
 db.serialize(async () => {
   db.run("DROP TABLE IF EXISTS users");
@@ -22,14 +25,9 @@ db.serialize(async () => {
     "INSERT INTO users (username, password, coins) VALUES (?, ?, ?)",
   );
 
-  const users = [
-    { username: "admin", password: "admin123", coins: 100 },
-    { username: "player1", password: "pass123", coins: 50 },
-  ];
-
   for (const u of users) {
     const hash = await bcrypt.hash(u.password, 10);
-    insert.run(u.username, hash, u.coins);
+    insert.run(u.username, hash, 0);
   }
 
   insert.finalize();
