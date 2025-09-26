@@ -4,7 +4,7 @@ import path from "path";
 import fs from "fs";
 
 const db = new sqlite3.Database(path.resolve(import.meta.dir, "app.db"));
-const raw = fs.readFileSync("users.json", "utf-8");
+const raw = fs.readFileSync("../users.json", "utf-8");
 const users: { username: string; password: string }[] = JSON.parse(raw);
 
 db.serialize(async () => {

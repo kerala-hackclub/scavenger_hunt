@@ -2,6 +2,7 @@ import { KeyRound, LogOut } from "lucide-react";
 import Chest from "./Components/Chest/Chest";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Login from "./Login";
+import Rules from "./Rules"; // Import the Rules component
 import { Flip, ToastContainer } from "react-toastify";
 import { useState, useEffect } from "react";
 
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           <Route path="/main" element={<MainPage />} />
           <Route path="/" element={<Login />} />
+          <Route path="/rules" element={<Rules />} /> {/* Add the new route */}
         </Routes>
       </div>
     </BrowserRouter>
