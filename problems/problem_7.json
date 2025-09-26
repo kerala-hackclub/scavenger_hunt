@@ -1,0 +1,6 @@
+{
+  "problem": "THE PASSWORD CRACKER\nA password-protected ZIP file: /downloads/secret_vault.zip\n\nHint: The password is the MD5 hash of \"oracle\" followed by the year of the first computer bug (1947).\n\nUnlock the ZIP to find your flag.",
+  "solution": "Password = md5(\"oracle1947\") = 5d41402abc4b2a76b9719d911017c592\nZIP contains flag: FLAG{password_cracker_pro}",
+  "answer": "password_cracker_pro",
+  "points": 320
+}
