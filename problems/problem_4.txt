@@ -12,4 +12,4 @@ Caesar cipher (ROT13) decode
 "The flag is where the web fails: FLAG{however_it_is_not_this}"
 
 Answer: however_it_is_not_this
-Points: 2
+Points: 250

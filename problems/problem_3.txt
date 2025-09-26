@@ -9,4 +9,4 @@ Hint: My path is /countdown but my secret lies behind the digits.
 Solution: 
 Inspect and find FLAG{behind_the_curtain} in the timer element 
 Answer: behind_the_curtain 
-Points: 1
+Points: 200

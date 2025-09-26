@@ -15,4 +15,4 @@ find robots.txt file and get
 FLAG{robots_know_secrets} 
 
 Answer: robots_know_secrets
-Points: 2
+Points: 500

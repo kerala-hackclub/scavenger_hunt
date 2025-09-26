@@ -1,14 +1,16 @@
 Problem:
-THE BINARY GUARDIAN
-Ones and zeros, pure and true,
-A message hidden just for you.
-Convert this string to read the text,
-The flag you seek will be there next:
+THE REDIRECT MAZE
+Follow the path where pages turn,
+At each step, new clues you'll learn.
+Start at /maze/begin and don't lose your way,
+The final destination holds the flag today.
 
-01000110 01001100 01000001 01000111 01111011 01100010 01101001 01101110 01100001 01110010 01111001 01011111 01110111 01101001 01111010 01100001 01110010 01100100 01111101
+Hint: Watch the URL patterns carefully.
 
 Solution: 
-Convert the Binary into ASCII then it returns FLAG{binary_wizard}
+/maze/begin → redirects to /maze/step1 with clue "add 2"
+/maze/step3 → redirects to /maze/step5 with clue "multiply by 3"
+/maze/step15 → reveals FLAG{redirect_expert}
 
-Answer: binary_wizard  
-Points: 2
+Answer: redirect_expert 
+Points: 350

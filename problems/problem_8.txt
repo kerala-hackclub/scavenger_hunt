@@ -1,16 +1,14 @@
-Problem: 
-THE COOKIE VAULT
-Some treasures require a key to access,
-Stored in a vault you must confess.
-Set the cookie 'oracle_access' to 'true',
-Then visit the vault for what's owed to you.
+THE REBUS RIDDLE
+Solve the visual puzzle:
 
-Hint: The vault awaits at /vault
+[EYE] [H8] [TEA]
 
-Solution: 
-Use browser console or developer tools to set cookie:
-document.cookie = "oracle_access=true; path=/"
-Visit /vault → reveals FLAG{cookie_monster} 
+Combine the solutions in all caps no spaces to form the flag.
 
-Answer: cookie_monster 
-Points: 3
+Solution:
+Eye = I, H8 = Hate, Tea = T → FLAG{IHATET}
+
+Answer: IHATET 
+Points: 100
+
+

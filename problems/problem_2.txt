@@ -11,4 +11,4 @@ Minotaur cannot be beaten as it has greater speed than the player. Use inspect a
 FLAG{cunning_over_brute_force}
  
 Answer: cunning_over_brute_force 
-Points: 2
+Points: 250
