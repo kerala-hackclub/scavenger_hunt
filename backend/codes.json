@@ -1,0 +1,16 @@
+{
+  "chest-1": { "code": "code-1", "coins": 100 },
+  "chest-2": { "code": "code-2", "coins": 200 },
+  "chest-3": { "code": "code-3", "coins": 150 },
+  "chest-4": { "code": "code-4", "coins": 250 },
+  "chest-5": { "code": "code-5", "coins": 300 },
+  "chest-6": { "code": "code-6", "coins": 120 },
+  "chest-7": { "code": "code-7", "coins": 180 },
+  "chest-8": { "code": "code-8", "coins": 220 },
+  "chest-9": { "code": "code-9", "coins": 280 },
+  "chest-10": { "code": "code-10", "coins": 320 },
+  "chest-11": { "code": "code-11", "coins": 130 },
+  "chest-12": { "code": "code-12", "coins": 170 },
+  "chest-13": { "code": "code-13", "coins": 230 },
+  "chest-14": { "code": "code-14", "coins": 270 }
+}

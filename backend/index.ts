@@ -3,6 +3,11 @@ import sqlite3 from "sqlite3";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import path from "path";
+import fs from "fs/promises";
+import cors from "cors";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 import type { Request, Response, NextFunction } from "express";
 
@@ -12,6 +17,7 @@ const db = new sqlite3.Database(path.resolve(import.meta.dir, "app.db"));
 // ⚠️ Use env var in production
 const SECRET = process.env.JWT_SECRET!;
 
+app.use(cors());
 app.use(express.json());
 
 interface JwtPayload {
@@ -91,8 +97,16 @@ app.post("/coins", auth, (req: Request, res: Response) => {
 });
 
 // ---------------------- CHESTS ----------------------
-app.post("/unlock", auth, (req: Request, res: Response) => {
-  const { chestId } = req.body;
+app.post("/unlock", auth, async (req: Request, res: Response) => {
+  const { chestId, code } = req.body;
+  const codes = JSON.parse(
+    await fs.readFile(path.resolve(import.meta.dir, "codes.json"), "utf-8"),
+  );
+
+  if (codes[`chest-${chestId}`].code !== code) {
+    return res.status(400).json({ error: "Invalid code" });
+  }
+
   db.get(
     "SELECT unlocked_chests FROM users WHERE id = ?",
     [req.user!.id],
@@ -112,23 +126,32 @@ app.post("/unlock", auth, (req: Request, res: Response) => {
   );
 });
 
-app.post("/collect", auth, (req: Request, res: Response) => {
+app.post("/collect", auth, async (req: Request, res: Response) => {
   const { chestId } = req.body;
+  const codes = JSON.parse(
+    await fs.readFile(path.resolve(import.meta.dir, "codes.json"), "utf-8"),
+  );
+  const coins = codes[`chest-${chestId}`].coins;
+
   db.get(
     "SELECT collected_chests FROM users WHERE id = ?",
     [req.user!.id],
     (err, row: any) => {
       if (err) return res.status(500).json({ error: "DB error" });
       let collected: number[] = JSON.parse(row.collected_chests);
-      if (!collected.includes(chestId)) collected.push(chestId);
-      db.run(
-        "UPDATE users SET collected_chests = ? WHERE id = ?",
-        [JSON.stringify(collected), req.user!.id],
-        (err2) => {
-          if (err2) return res.status(500).json({ error: "DB error" });
-          res.json({ success: true, collected });
-        },
-      );
+      if (!collected.includes(chestId)) {
+        collected.push(chestId);
+        db.run(
+          `UPDATE users SET collected_chests = ?, coins = coins + ? WHERE id = ?`,
+          [JSON.stringify(collected), coins, req.user!.id],
+          (err2) => {
+            if (err2) return res.status(500).json({ error: "DB error" });
+            res.json({ success: true, collected });
+          },
+        );
+      } else {
+        res.json({ success: false, error: "Chest already collected" });
+      }
     },
   );
 });

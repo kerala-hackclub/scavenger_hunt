@@ -1,8 +1,9 @@
 import { KeyRound, LogOut } from "lucide-react";
 import Chest from "./Components/Chest/Chest";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Login from "./Login";
 import { Flip, ToastContainer } from "react-toastify";
+import { useState, useEffect } from "react";
 
 function App() {
   return (
@@ -34,6 +35,53 @@ function App() {
 export default App;
 
 const MainPage = () => {
+  const [user, setUser] = useState<any>(null);
+  const [code, setCode] = useState("");
+  const navigate = useNavigate();
+
+  const fetchUser = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/");
+      return;
+    }
+    const res = await fetch("http://localhost:3000/me", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await res.json();
+    setUser(data);
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, [navigate]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
+
+  const handleUnlock = async () => {
+    const token = localStorage.getItem("token");
+    const chestId = parseInt(code.split("-")[1]);
+    const res = await fetch("http://localhost:3000/unlock", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ chestId, code }),
+    });
+    const data = await res.json();
+    if (data.success) {
+      fetchUser();
+    } else {
+      alert(data.error);
+    }
+  };
+
   return (
     <>
       <div className="bg-black/50 w-screen h-screen overflow-scroll flex flex-col items-center">
@@ -42,29 +90,36 @@ const MainPage = () => {
             <LogOut
               size={20}
               className="text-red-400 hover:mr-2 active:mr-1 transition-all duration-300 hover:scale-190 active:scale-140 hover:bg-[rgba(100,0,0,0.3)] rounded-full hover:p-[0.1em] border-1 border-[rgba(100,0,0,0.3)] backdrop-blur-2xl"
+              onClick={handleLogout}
             />
-            <p>rino</p>
+            <p>{user?.username}</p>
           </div>
           <div className="flex gap-2 bg-[rgba(0,0,0,0.3)] backdrop-blur-2xl px-3 py-1 justify-center items-center rounded-full border-1 border-white/15">
             <img src="/coin.webp" className="w-6 h-6" />
-            <p>000</p>
+            <p>{user?.coins}</p>
           </div>
         </div>
         <img src="/title.webp" className="h-150" />
         <div className="text-white w-full sm:px-0 px-5 flex flex-col sm:flex-row sm:justify-center justify-start sm:items-start items-center gap-5">
-          <CodeInput />
+          <CodeInput onChange={(e: any) => setCode(e.target.value)} />
           <div className="sm:w-40 w-[50%] h-15 text-xl">
-            <Button>
+            <Button onClick={handleUnlock}>
               <KeyRound className="min-w-[30px]" />
               UNLOCK
             </Button>
           </div>
         </div>
         <div className="mx-5 grid sm:grid-cols-5 grid-cols-2 sm:w-[70%] mt-20 mb-50">
-          {Array(15)
+          {Array(14)
             .fill(1)
             .map((_, i) => (
-              <Chest index={i + 1} />
+              <Chest
+                key={i}
+                index={i + 1}
+                unlocked={user?.unlocked?.includes(i + 1)}
+                collected={user?.collected?.includes(i + 1)}
+                fetchUser={fetchUser}
+              />
             ))}
         </div>
       </div>
@@ -72,13 +127,14 @@ const MainPage = () => {
   );
 };
 
-const CodeInput = () => {
+const CodeInput = ({ onChange }: any) => {
   return (
     <div className="sm:w-120 w-full backdrop-blur-2xl h-15 bg-[rgba(109,126,134,0.5)] overflow-hidden rounded-xl border-2 border-[rgba(255,255,255,0.3)]">
       <input
         type="text"
         placeholder="Enter the codes here."
         className="w-full h-full px-4 text-2xl focus:bg-[rgba(0,0,0,0.1)]"
+        onChange={onChange}
       />
     </div>
   );
@@ -87,9 +143,11 @@ const CodeInput = () => {
 export const Input = ({
   placeholder,
   type,
+  onChange,
 }: {
   placeholder: string;
   type: string;
+  onChange?: (e: any) => void;
 }) => {
   return (
     <div className="w-full backdrop-blur-2xl h-15 bg-[rgba(109,126,134,0.5)] overflow-hidden rounded-xl border-2 border-[rgba(255,255,255,0.3)]">
@@ -97,14 +155,16 @@ export const Input = ({
         type={type}
         placeholder={placeholder}
         className="w-full h-full px-4 text-2xl text-white focus:bg-[rgba(0,0,0,0.1)]"
+        onChange={onChange}
       />
     </div>
   );
 };
 
-export const Button = ({ children }: any) => {
+export const Button = ({ children, onClick }: any) => {
   return (
     <button
+      onClick={onClick}
       className="flex justify-center items-center sm:gap-2 gap-3 w-full h-full px-6 py-2 rounded-xl bg-gradient-to-b from-yellow-300 to-yellow-600 text-black
       font-semibold shadow-md border border-yellow-700
          sm:hover:from-yellow-200 sm:hover:to-yellow-500 
