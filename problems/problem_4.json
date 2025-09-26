@@ -1,0 +1,6 @@
+{
+  "problem": "THE CRYPTOGRAPHIC ORACLE\nI speak in codes and numbers pure,\nA cipher that has stood secure.\nCaesar himself would know my art,\nShift three to read the hidden part.\n\nGur synt vf jurer gur jro snyfr: SYNT{ubjrire_vg_vf_abg_guvf}",
+  "solution": "Caesar cipher (ROT13) decode\n\"The flag is where the web fails: FLAG{however_it_is_not_this}"",
+  "answer": "however_it_is_not_this",
+  "points": 250
+}

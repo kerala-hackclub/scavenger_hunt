@@ -1,0 +1,6 @@
+{
+  "problem": "THE REBUS RIDDLE\nSolve the visual puzzle:\n\n[EYE] [H8] [TEA]\n\nCombine the solutions in all caps no spaces to form the flag.",
+  "solution": "Eye = I, H8 = Hate, Tea = T → FLAG{IHATET}",
+  "answer": "IHATET",
+  "points": 100
+}

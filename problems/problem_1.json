@@ -1,0 +1,6 @@
+{
+  "problem": "THE SILENT GUARDIAN\nTo begin your journey, seek the answer where the rules are defined,\nbut look not to the text—look to the space between.\nThe silent guardian holds your first key.",
+  "solution": "By inspecting /rules they get \n<!-- The web robots know where to avoid. \nFind their instruction file to discover the hidden flag. → \n\nfind robots.txt file and get \n# Oracle's hidden message\n# The flag is where creativity meets code\nFLAG{robots_know_secrets}",
+  "answer": "robots_know_secrets",
+  "points": 500
+}

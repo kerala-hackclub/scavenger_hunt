@@ -1,0 +1,7 @@
+{
+  "problem": "THE HIDDEN CHRONOMETER\nTime reveals what it first conceals.\nI count backward toward the Oracle's final awakening.\nFind me where moments are measured and futures are anticipated.\n\nHint: My path is /countdown but my secret lies behind the digits.",
+  "solution": "Inspect and find FLAG{behind_the_curtain} in the timer element",
+  "answer": "behind_the_curtain",
+  "points": 200
+}
+
