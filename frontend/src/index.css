@@ -4,4 +4,21 @@
 * {
   outline: none;
   font-family: "Roboto Slab", serif;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+:root {
+  --toastify-color-dark: rgba(15, 39, 40, 0.8);
+}
+
+.Toastify__toast {
+  border: 2px solid rgba(15, 39, 40, 0.5);
+  border-radius: 100000px;
+  margin-top: 10px;
+  backdrop-filter: blur(100px);
+}
+
+.Toastify__toast-container {
+  margin-top: 50px;
 }

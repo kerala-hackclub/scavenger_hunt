@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { Button } from "../../App";
 
 function Chest({ index }: { index: number }) {
@@ -19,7 +20,14 @@ function Chest({ index }: { index: number }) {
       )}
       {index < 3 ? (
         <div
-          onClick={playSound}
+          onClick={() => {
+            playSound();
+            toast(<ToastContent />, {
+              closeButton: false,
+              className: "w-30 border",
+              ariaLabel: "Email received",
+            });
+          }}
           className="w-20 h-8 absolute bottom-3 left-1/4 text-[0.8em]"
         >
           <Button>COLLECT</Button>
@@ -28,5 +36,14 @@ function Chest({ index }: { index: number }) {
     </div>
   );
 }
+
+const ToastContent = () => {
+  return (
+    <div className="w-full flex justify-start gap-5 text-2xl text-white/90 items-center">
+      <img src="/coin.webp" className="w-8 aspect-square animate-bounce" />
+      Collected 200 coins!
+    </div>
+  );
+};
 
 export default Chest;
