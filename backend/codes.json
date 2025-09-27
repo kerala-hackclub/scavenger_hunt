@@ -1,10 +1,11 @@
 {
   "chest-1": { "code": "robots_know_secrets", "coins": 500 },
-  "chest-2": { "code": "cunning_over_brute_force", "coins": 250 },
-  "chest-3": { "code": "behind_the_curtain", "coins": 200 },
-  "chest-4": { "code": "however_it_is_not_this", "coins": 250 },
-  "chest-5": { "code": "binary_wizard", "coins": 180 },
-  "chest-6": { "code": "redirect_expert", "coins": 350 },
-  "chest-7": { "code": "password_cracker_pro", "coins": 320 },
-  "chest-8": { "code": "IHATET", "coins": 100 }
+  "chest-2": { "code": "YOUSEEWHYTOO", "coins": 100 },
+  "chest-3": { "code": "however_it_is_not_this", "coins": 250 },
+  "chest-4": { "code": "binary_wizard", "coins": 180 },
+  "chest-5": { "code": "redirect_expert", "coins": 350 },
+  "chest-6": { "code": "password_cracker_pro", "coins": 320 },
+  "chest-7": { "code": "IHATET", "coins": 100 },
+  "chest-8": { "code": "COIN_LOCK_KEY", "coins": 180 }
 }
+

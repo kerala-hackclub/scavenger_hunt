@@ -20,7 +20,7 @@ function Chest({ index, unlocked, collected, fetchUser }: { index: number, unloc
     const data = await res.json();
     if (data.success) {
       playSound();
-      toast(<ToastContent />, {
+      toast(<ToastContent coins={data.collectedCoins} />, {
         closeButton: false,
         className: "w-30 border",
         ariaLabel: "Email received",
@@ -53,11 +53,11 @@ function Chest({ index, unlocked, collected, fetchUser }: { index: number, unloc
   );
 }
 
-const ToastContent = () => {
+const ToastContent = ({ coins = 0 }: { coins?: number }) => {
   return (
     <div className="w-full flex justify-start gap-5 text-2xl text-white/90 items-center">
       <img src="/coin.webp" className="w-8 aspect-square animate-bounce" />
-      Collected 200 coins!
+      Collected {coins} coins!
     </div>
   );
 };

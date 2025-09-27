@@ -1,6 +1,6 @@
 {
-  "problem": "THE REBUS RIDDLE\nSolve the visual puzzle:\n\n[EYE] [H8] [TEA]\n\nCombine the solutions in all caps no spaces to form the flag.",
-  "solution": "Eye = I, H8 = Hate, Tea = T → FLAG{IHATET}",
-  "answer": "IHATET",
-  "points": 100
+  "problem": "The Numismatist's Secret\nYou can get more from what you have if you know how to use it.",
+  "solution": "Download image and find flag hidden in the bottom of it",
+  "answer": "",
+  "points": 180
 }

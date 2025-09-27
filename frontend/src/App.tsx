@@ -3,6 +3,7 @@ import Chest from "./Components/Chest/Chest";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Login from "./Login";
 import Rules from "./Rules"; // Import the Rules component
+import Maze from "./Maze";
 import { Flip, ToastContainer } from "react-toastify";
 import { useState, useEffect } from "react";
 
@@ -27,7 +28,8 @@ function App() {
         <Routes>
           <Route path="/main" element={<MainPage />} />
           <Route path="/" element={<Login />} />
-          <Route path="/rules" element={<Rules />} /> {/* Add the new route */}
+          <Route path="/rules" element={<Rules />} />
+          <Route path="/maze/:step" element={<Maze />} />
         </Routes>
       </div>
     </BrowserRouter>
@@ -67,14 +69,14 @@ const MainPage = () => {
 
   const handleUnlock = async () => {
     const token = localStorage.getItem("token");
-    const chestId = parseInt(code.split("-")[1]);
+
     const res = await fetch("http://localhost:3000/unlock", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ chestId, code }),
+      body: JSON.stringify({ code }),
     });
     const data = await res.json();
     if (data.success) {
@@ -112,7 +114,7 @@ const MainPage = () => {
           </div>
         </div>
         <div className="mx-5 grid sm:grid-cols-5 grid-cols-2 sm:w-[70%] mt-20 mb-50">
-          {Array(14)
+          {Array(8)
             .fill(1)
             .map((_, i) => (
               <Chest

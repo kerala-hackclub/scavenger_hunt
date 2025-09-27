@@ -98,14 +98,18 @@ app.post("/coins", auth, (req: Request, res: Response) => {
 
 // ---------------------- CHESTS ----------------------
 app.post("/unlock", auth, async (req: Request, res: Response) => {
-  const { chestId, code } = req.body;
+  const { code } = req.body;
   const codes = JSON.parse(
     await fs.readFile(path.resolve(import.meta.dir, "codes.json"), "utf-8"),
   );
 
-  if (codes[`chest-${chestId}`].code !== code) {
+  const chestEntry = Object.entries(codes).find(([key, value]: [string, any]) => value.code === code);
+
+  if (!chestEntry) {
     return res.status(400).json({ error: "Invalid code" });
   }
+
+  const chestId = parseInt(chestEntry[0].split('-')[1]);
 
   db.get(
     "SELECT unlocked_chests FROM users WHERE id = ?",
@@ -131,29 +135,43 @@ app.post("/collect", auth, async (req: Request, res: Response) => {
   const codes = JSON.parse(
     await fs.readFile(path.resolve(import.meta.dir, "codes.json"), "utf-8"),
   );
-  const coins = codes[`chest-${chestId}`].coins;
+  const chest = codes[`chest-${chestId}`];
+  if (!chest) {
+    return res.status(404).json({ error: "Chest not found" });
+  }
+  const baseCoins = chest.coins;
 
-  db.get(
-    "SELECT collected_chests FROM users WHERE id = ?",
-    [req.user!.id],
-    (err, row: any) => {
-      if (err) return res.status(500).json({ error: "DB error" });
-      let collected: number[] = JSON.parse(row.collected_chests);
-      if (!collected.includes(chestId)) {
-        collected.push(chestId);
-        db.run(
-          `UPDATE users SET collected_chests = ?, coins = coins + ? WHERE id = ?`,
-          [JSON.stringify(collected), coins, req.user!.id],
-          (err2) => {
-            if (err2) return res.status(500).json({ error: "DB error" });
-            res.json({ success: true, collected });
-          },
-        );
-      } else {
-        res.json({ success: false, error: "Chest already collected" });
-      }
-    },
-  );
+  db.get("SELECT collected_count FROM chest_stats WHERE chest_id = ?", [chestId], (err, row: any) => {
+    if (err) return res.status(500).json({ error: "DB error" });
+    const collected_count = row.collected_count;
+    const calculatedCoins = Math.max(1, Math.floor(baseCoins / Math.pow(2, collected_count)));
+
+    db.get(
+      "SELECT collected_chests FROM users WHERE id = ?",
+      [req.user!.id],
+      (err, userRow: any) => {
+        if (err) return res.status(500).json({ error: "DB error" });
+        let collected: number[] = JSON.parse(userRow.collected_chests);
+        if (!collected.includes(chestId)) {
+          collected.push(chestId);
+          db.run(
+            `UPDATE users SET collected_chests = ?, coins = coins + ? WHERE id = ?`,
+            [JSON.stringify(collected), calculatedCoins, req.user!.id],
+            (err2) => {
+              if (err2) return res.status(500).json({ error: "DB error" });
+
+              db.run("UPDATE chest_stats SET collected_count = collected_count + 1 WHERE chest_id = ?", [chestId], (err3) => {
+                if (err3) return res.status(500).json({ error: "DB error" });
+                res.json({ success: true, collected, collectedCoins: calculatedCoins });
+              });
+            },
+          );
+        } else {
+          res.json({ success: false, error: "Chest already collected" });
+        }
+      },
+    );
+  });
 });
 
 // ---------------------- SERVER ----------------------

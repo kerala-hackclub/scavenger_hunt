@@ -1,15 +1,14 @@
 Problem:
-THE CRYPTOGRAPHIC ORACLE
-I speak in codes and numbers pure,
-A cipher that has stood secure.
-Caesar himself would know my art,
-Shift three to read the hidden part.
+THE BINARY GUARDIAN
+Ones and zeros, pure and true,
+A message hidden just for you.
+Convert this string to read the text,
+The flag you seek will be there next:
 
-Gur synt vf jurer gur jro snyfr: SYNT{ubjrire_vg_vf_abg_guvf} 
+01000110 01001100 01000001 01000111 01111011 01100010 01101001 01101110 01100001 01110010 01111001 01011111 01110111 01101001 01111010 01100001 01110010 01100100 01111101
 
-Solution:
-Caesar cipher (ROT13) decode
-"The flag is where the web fails: FLAG{however_it_is_not_this}"
+Solution: 
+Convert the Binary into ASCII then it returns FLAG{binary_wizard}
 
-Answer: however_it_is_not_this
-Points: 250
+Answer: binary_wizard  
+Points: 180
