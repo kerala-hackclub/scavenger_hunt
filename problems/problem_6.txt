@@ -1,16 +1,14 @@
 Problem:
-THE REDIRECT MAZE
-Follow the path where pages turn,
-At each step, new clues you'll learn.
-Start at /maze/begin and don't lose your way,
-The final destination holds the flag today.
+THE PASSWORD CRACKER
+A password-protected ZIP file: /secret_vault.zip
 
-Hint: Watch the URL patterns carefully.
+Hint: The password is the MD5 hash of "oracle" followed by the year of the first computer bug (1947).
+
+Unlock the ZIP to find your flag.
 
 Solution: 
-/maze/begin → redirects to /maze/step1 with clue "add 2"
-/maze/step3 → redirects to /maze/step5 with clue "multiply by 3"
-/maze/step15 → reveals FLAG{redirect_expert}
+Password = md5("oracle1947") = 5d41402abc4b2a76b9719d911017c592
+ZIP contains flag: FLAG{password_cracker_pro}
 
-Answer: redirect_expert 
-Points: 350
+Answer: password_cracker_pro
+Points: 320

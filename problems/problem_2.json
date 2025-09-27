@@ -1,7 +1,6 @@
 {
-  "problem": "THE MINOTAUR'S LABYRINTH\nStrength will fail you in the maze of the beast,\nBut cunning eyes can find the hidden path.\nSometimes victory comes from changing the rules, not following them.\n\nSeek the game where the bull awaits, and conquer it with wisdom, not force.",
-  "solution": "Minotaur cannot be beaten as it has greater speed than the player. Use inspect and set minotaur_speed to 0 and get \nFLAG{cunning_over_brute_force}",
-  "answer": "cunning_over_brute_force",
-  "points": 250
+  "problem": "THE REBUS RIDDLE\nSolve the visual puzzle:\n\n[U] [C] [Y-FORK-ROAD] [2]\n\nCombine the solutions in all caps no spaces to form the flag.\n(Note: The [Y-FORK-ROAD] is an image of a fork in a road).",
+  "solution": "YOU + SEE + WHY + TOO = YOUSEEWHYTOO",
+  "answer": "YOUSEEWHYTOO",
+  "points": 100
 }
-

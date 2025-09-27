@@ -1,14 +1,12 @@
-Problem: 
-THE MINOTAUR'S LABYRINTH
-Strength will fail you in the maze of the beast,
-But cunning eyes can find the hidden path.
-Sometimes victory comes from changing the rules, not following them.
+THE REBUS RIDDLE
+Solve the visual puzzle:
 
-Seek the game where the bull awaits, and conquer it with wisdom, not force.
+[U] [C] [Y] [2]
 
-Solution: 
-Minotaur cannot be beaten as it has greater speed than the player. Use inspect and set minotaur_speed to 0 and get 
-FLAG{cunning_over_brute_force}
- 
-Answer: cunning_over_brute_force 
-Points: 250
+Combine the solutions in all caps no spaces to form the flag.
+
+Solution:
+YOU + SEE + WHY + TOO = YOUSEEWHYTOO
+
+Answer: YOUSEEWHYTOO 
+Points: 100

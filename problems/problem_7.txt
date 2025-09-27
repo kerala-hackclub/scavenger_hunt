@@ -1,14 +1,14 @@
-Problem:
-THE PASSWORD CRACKER
-A password-protected ZIP file: /secret_vault.zip
+THE REBUS RIDDLE
+Solve the visual puzzle:
 
-Hint: The password is the MD5 hash of "oracle" followed by the year of the first computer bug (1947).
+[EYE] [H8] [TEA]
 
-Unlock the ZIP to find your flag.
+Combine the solutions in all caps no spaces to form the flag.
 
-Solution: 
-Password = md5("oracle1947") = 5d41402abc4b2a76b9719d911017c592
-ZIP contains flag: FLAG{password_cracker_pro}
+Solution:
+Eye = I, H8 = Hate, Tea = T → FLAG{IHATET}
 
-Answer: password_cracker_pro
-Points: 320
+Answer: IHATET 
+Points: 100
+
+
