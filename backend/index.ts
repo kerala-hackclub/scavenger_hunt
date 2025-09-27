@@ -103,13 +103,15 @@ app.post("/unlock", auth, async (req: Request, res: Response) => {
     await fs.readFile(path.resolve(import.meta.dir, "codes.json"), "utf-8"),
   );
 
-  const chestEntry = Object.entries(codes).find(([key, value]: [string, any]) => value.code === code);
+  const chestEntry = Object.entries(codes).find(
+    ([key, value]: [string, any]) => value.code === code,
+  );
 
   if (!chestEntry) {
     return res.status(400).json({ error: "Invalid code" });
   }
 
-  const chestId = parseInt(chestEntry[0].split('-')[1]);
+  const chestId = parseInt(chestEntry[0].split("-")[1]);
 
   db.get(
     "SELECT unlocked_chests FROM users WHERE id = ?",
@@ -141,38 +143,59 @@ app.post("/collect", auth, async (req: Request, res: Response) => {
   }
   const baseCoins = chest.coins;
 
-  db.get("SELECT collected_count FROM chest_stats WHERE chest_id = ?", [chestId], (err, row: any) => {
-    if (err) return res.status(500).json({ error: "DB error" });
-    const collected_count = row.collected_count;
-    const calculatedCoins = Math.max(1, Math.floor(baseCoins / Math.pow(2, collected_count)));
+  db.get(
+    "SELECT collected_count FROM chest_stats WHERE chest_id = ?",
+    [chestId],
+    (err, row: any) => {
+      if (err) return res.status(500).json({ error: "DB error" });
+      const collected_count = row.collected_count;
+      const calculatedCoins = Math.max(
+        1,
+        Math.floor(baseCoins / Math.pow(2, collected_count)),
+      );
 
-    db.get(
-      "SELECT collected_chests FROM users WHERE id = ?",
-      [req.user!.id],
-      (err, userRow: any) => {
-        if (err) return res.status(500).json({ error: "DB error" });
-        let collected: number[] = JSON.parse(userRow.collected_chests);
-        if (!collected.includes(chestId)) {
-          collected.push(chestId);
-          db.run(
-            `UPDATE users SET collected_chests = ?, coins = coins + ? WHERE id = ?`,
-            [JSON.stringify(collected), calculatedCoins, req.user!.id],
-            (err2) => {
-              if (err2) return res.status(500).json({ error: "DB error" });
+      db.get(
+        "SELECT collected_chests FROM users WHERE id = ?",
+        [req.user!.id],
+        (err, userRow: any) => {
+          if (err) return res.status(500).json({ error: "DB error" });
+          let collected: number[] = JSON.parse(userRow.collected_chests);
+          if (!collected.includes(chestId)) {
+            collected.push(chestId);
+            db.run(
+              `UPDATE users SET collected_chests = ?, coins = coins + ? WHERE id = ?`,
+              [JSON.stringify(collected), calculatedCoins, req.user!.id],
+              (err2) => {
+                if (err2) return res.status(500).json({ error: "DB error" });
 
-              db.run("UPDATE chest_stats SET collected_count = collected_count + 1 WHERE chest_id = ?", [chestId], (err3) => {
-                if (err3) return res.status(500).json({ error: "DB error" });
-                res.json({ success: true, collected, collectedCoins: calculatedCoins });
-              });
-            },
-          );
-        } else {
-          res.json({ success: false, error: "Chest already collected" });
-        }
-      },
-    );
-  });
+                db.run(
+                  "UPDATE chest_stats SET collected_count = collected_count + 1 WHERE chest_id = ?",
+                  [chestId],
+                  (err3) => {
+                    if (err3)
+                      return res.status(500).json({ error: "DB error" });
+                    res.json({
+                      success: true,
+                      collected,
+                      collectedCoins: calculatedCoins,
+                    });
+                  },
+                );
+              },
+            );
+          } else {
+            res.json({ success: false, error: "Chest already collected" });
+          }
+        },
+      );
+    },
+  );
 });
 
-// ---------------------- SERVER ----------------------
-app.listen(3000, () => console.log("Server running on http://localhost:3000"));
+// ---------------------- SERVER --------------------
+const IP = "192.168.11.19";
+const PORT = 3000;
+
+app.listen(PORT, IP, () => {
+  console.log("Server started");
+});
